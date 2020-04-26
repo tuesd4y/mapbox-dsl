@@ -1,0 +1,17 @@
+name: Build LaTeX paper
+on: [push]
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v1
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@master
+        with:
+          root_file: dsl-for-visualizing-geospatial-data.tex
+          working_directory: paper
+      - uses: actions/upload-artifact@v1
+        with:
+          name: my-artifact
+          path: paper/dsl-for-visualizing-geospatial-data.pdf
