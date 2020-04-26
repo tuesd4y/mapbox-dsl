@@ -10,7 +10,7 @@ jobs:
         uses: xu-cheng/latex-action@master
         with:
           root_file: dsl-for-visualizing-geospatial-data.tex
-          working_directory: paper
+          working_directory: paper/
       - uses: actions/upload-artifact@v1
         with:
           name: my-artifact
