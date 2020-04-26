@@ -1,0 +1,134 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Developing a Domain Specific Language for visualizing geospatial data}
+
+\author{
+\IEEEauthorblockN{ Christopher Stelzmüller}
+\IEEEauthorblockA{Domain Specific Languages, Topic 2 \\
+11814096 / 521\\
+c.stelzmueller@triply.at}
+\and
+\IEEEauthorblockN{ Sebastian Tanzer}
+\IEEEauthorblockA{Domain Specific Languages, Topic 2 \\
+11826853 / 521\\
+s.tanzer@triply.at}
+}
+
+\maketitle
+
+\begin{abstract}
+The application of geospatial big data to an increasing number of topics presents new opportunities and challenges for cartographic researchers. Many emerging technologies focus on providing functionality to implement appealing and informative visualisations. At the same time, most web-based geospatial data visualisation technologies rely on simple configuration files for defining styling. We propose a typesafe domain-specific language for implementing reusable map visualisations with MapboxGl to improve development efficiency and utilise IDE support.
+\end{abstract}
+
+\begin{IEEEkeywords}
+data visualization, mapbox, domain specific language, geospatial, big data
+\end{IEEEkeywords}
+
+\section{Introduction}
+% fill rest of first page
+
+\subsection{Current situation}
+% page 2
+
+how a map style looks like (json), 
+
+- sources 
+
+- layers
+
+- expressions
+
+simple example code
+
+problems with existing solution
+
+\subsection{Why create a Domain Specific Language}
+
+The idea behind a Domain-Specific Language (DSL) is a customised language with the target to provide a high-level abstraction to a particular problem domain. With the aim of providing a much better solution
+for a smaller set of problems rather than a general-purpose language. \cite{van2000domain}
+
+By providing notations and constructs for a specific application domain, DSLs provide ease of use compared with General-Programming Languages (GPLs) in a certain domain and increase productivity. \cite{10.1145/1118890.1118892} A DSL provides means to make code more readable and makes it easier to specify the intend in an understanding way. As a result, the time needed to investigate and fix mistakes. as well as modifying a system is also easier. Which again leads to an increase in productivity. \cite{fowler2010domain}
+
+\subsubsection{Typesafe}
+\subsubsection{Editor-Support and Validation}
+\subsubsection{Reusability}
+
+-
+
+\cite{gray2008dsls}
+\cite{zdun2010dsl}
+\cite{evgrafovanalysis}
+\cite{van2000domain}
+\cite{vierhauser2015developing}
+
+\section{Why MapboxGL}
+% page 3 - 3.3
+\subsection{comparison to other mapping frameworks}
+- uses webgl for map rendering
+
+- very customizable
+
+- useful for data visualizations
+
+- styles from style language or designed in mapbox-studio
+
+- we focus on style language
+
+- - json files, no compile-time validation, no static analysis, bad editor support (IntelliSense)
+
+\cite{mapbox2020style}
+
+\cite{panek2020online}
+
+% An in-depth analysis of dynamically rendered
+% vector-based maps with WebGL using Mapbox
+% GL JS
+% http://www.diva-portal.org/smash/get/diva2:851452/FULLTEXT02
+
+\section{Implementing the MapboxStyleDsl}
+
+\subsection{Comparison of different tools}
+
+\cite{mernik2005and}
+
+
+\subsection{Tools used}
+should be simple to implement, 
+
+use tools we already use in projects, 
+
+should work on at least web and android mobile, 
+
+if possible no runtime overhead
+
+dsls in kotlin:
+
+% https://github.com/breandan/kotlingrad
+\cite{considine2019kotlin}
+
+
+\section{Conclusion: before and after}
+example of a simple map visualisation with mapbox gl json syle and same example written in DSL,
+
+go into detail on the fact that an editor can now show recommendations and validate the config files, shows error if wrong types are used, etc.
+
+
+\section*{Acknowledgment}
+
+
+\bibliographystyle{plain} % We choose the "plain" reference style
+\bibliography{refs.bib} % 
+
+
+\end{document}
