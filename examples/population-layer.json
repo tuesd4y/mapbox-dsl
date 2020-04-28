@@ -1,0 +1,25 @@
+{
+  "id": "population",
+  "type": "fill-extrusion",
+  "source": {
+    "type": "geojson",
+    "data": "./data/vienna_population.geojson"
+  },
+  "paint": {
+    "fill-extrusion-color": [
+      "interpolate",
+      ["linear"],
+      ["*", 40, ["sqrt", ["get", "tot_p"]]],
+      0,
+      "#ecda9a",
+      5600,
+      "#ee4d5a"
+    ],
+    "fill-extrusion-height": [
+      "*",
+      40,
+      ["sqrt", ["get", "tot_p"]]
+    ],
+    "fill-extrusion-opacity": 0.5
+  }
+}
