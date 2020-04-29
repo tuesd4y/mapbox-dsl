@@ -1,4 +1,4 @@
-name: Build LaTeX paper
+name: Build LaTeX paper and create release
 on: [push]
 jobs:
   build_latex:
@@ -12,7 +12,23 @@ jobs:
           root_file: dsl-for-visualizing-geospatial-data.tex
           working_directory: paper/
           args: -pdf -bibtex -latexoption=-file-line-error -latexoption=-interaction=nonstopmode -latexoption=-shell-escape
-      - uses: actions/upload-artifact@v1
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: my-artifact
-          path: paper/dsl-for-visualizing-geospatial-data.pdf
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: paper/dsl-for-visualizing-geospatial-data.pdf
+          asset_name: dsl-for-visualizing-geospatial-data.pdf
+          asset_content_type: application/pdf
