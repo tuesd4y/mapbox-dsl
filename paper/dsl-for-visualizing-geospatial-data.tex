@@ -5,6 +5,7 @@
 \usepackage{hyperref}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
+\usepackage{listings}
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
@@ -83,7 +84,9 @@ A MSS JSON configuration consists of a root object which contains properties tha
 Since GeoJSON is widely used, is one of the de-facto standards for spatial vector data and can be easily converted to and from other spatial data-formats\cite{dixson2020geojson}, we will focus on visualizing GeoJSON data layers in Mapbox GL JS.
 
 A very useful feature of MSS is the ability to use \textit{data expressions} in order to dynamically apply properties and values from a data source to the map visualization. Expressions can be used to specify layout, paint or filter properties in layers. Each expression generally has the following structure: 
-\mint{text}|[expression, arg0, arg1, ...]|
+\\
+\lstinline{[expression, arg0, arg1, ...]}
+\\
 Assuming the referenced data source contains an integer property \textit{population}, the expression in figure \ref{fig:exp1} can be used to scale a circle's size with the population of the according feature. While this syntax allows for short and expressive expression definitions, expressing nested and more complicated constructs can lead to very big, and by extension also confusing expressions.
 
 \begin{figure}
