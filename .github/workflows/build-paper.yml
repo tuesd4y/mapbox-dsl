@@ -18,8 +18,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.runNumber }}
-          release_name: Release ${{ github.runNumber }}
+          tag_name: latest
+          release_name: built from latest commit
           draft: false
           prerelease: false
       - name: Upload Release Asset
