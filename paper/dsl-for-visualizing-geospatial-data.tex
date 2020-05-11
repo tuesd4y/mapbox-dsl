@@ -14,7 +14,7 @@
     
 \begin{document}
 
-\title{Developing a Domain Specific Language for visualizing geospatial data}
+\title{Developing a Domain Specific Language for Visualizing Geospatial Data}
 
 \author{
 \IEEEauthorblockN{ Christopher Stelzmüller}
@@ -74,25 +74,25 @@ GIScript is a domain specific language that was proposed by Zhang et al \cite{zh
 A MSS JSON configuration consists of a root object which contains properties that change the appearance of the whole map. Most commonly, the following values, objects and arrays are configured: 
 
 \begin{enumerate}
-    \item \textbf{sprite:} (string): a link to the base style of the map underlying the visualization
-    \item \textbf{center:} (array of number) the center of the map
-    \item \textbf{bearing:} (number) the angle by which the map is rotated
-    \item \textbf{sources:} (object with \textit{Source} values) data sources for the visualization
-    \item \textbf{layers:} (array of \textit{Layer} values) layers in the visualization, in the order that they should be drawn
+    \item \textbf{sprite} (string): A link to the base style of the map underlying the visualization
+    \item \textbf{center} (array of number): The center of the map
+    \item \textbf{bearing} (number): The angle by which the map is rotated
+    \item \textbf{sources} (object with \textit{Source} values): Data sources for the visualization
+    \item \textbf{layers} (array of \textit{Layer} values): Layers in the visualization, in the order that they should be drawn
 \end{enumerate}
 
-Since GeoJSON is widely used, is one of the de-facto standards for spatial vector data and can be easily converted to and from other spatial data-formats\cite{dixson2020geojson}, we will focus on visualizing GeoJSON data layers in Mapbox GL JS.
+Since GeoJSON is widely used, it is one of the de-facto standards for spatial vector data and can be easily converted to and from other spatial data-formats\cite{dixson2020geojson}, we will focus on visualizing GeoJSON data layers in Mapbox GL JS.
 
 A very useful feature of MSS is the ability to use \textit{data expressions} in order to dynamically apply properties and values from a data source to the map visualization. Expressions can be used to specify layout, paint or filter properties in layers. Each expression generally has the following structure: 
 \\
 \lstinline{[expression, arg0, arg1, ...]}
 \\
-Assuming the referenced data source contains an integer property \textit{population}, the expression in figure \ref{fig:exp1} can be used to scale a circle's size with the population of the according feature. While this syntax allows for short and expressive expression definitions, expressing nested and more complicated constructs can lead to very big, and by extension also confusing expressions.
+Assuming the referenced data source contains an integer property \textit{population}, the expression in Figure \ref{fig:exp1} can be used to scale a circle's size with the population of the according feature. While this syntax allows for short and expressive expression definitions, expressing nested and more complicated constructs can lead to very big, and by extension also confusing expressions.
 
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{img/circlesize.png}
-    \caption{Scaling circle-size with data expression}
+    \caption{Scaling circle-size with data expression.}
     \label{fig:exp1}
 \end{figure}
 
@@ -139,7 +139,7 @@ Especially for the construction of large software systems, but also in general o
     \label{fig:mapbox-config}
 \end{figure}
 % page 3 - 3.3
-To implement the 3D-elevation component of the visualization in figure \ref{fig:map_viz} the layer configuration specified in figure \ref{fig:mapbox-config} was used. This quick example illustrates a few of the problems that can come up when implementing visualizations with Mapbox GL JS. 
+To implement the 3D-elevation component of the visualization in Figure \ref{fig:map_viz} the layer configuration specified in Figure \ref{fig:mapbox-config} was used. This quick example illustrates a few of the problems that can come up when implementing visualizations with Mapbox GL JS. 
 
 First up, there is yet no static analysis tool that can be used in IDEs during the development process. This means, that developers have to run their code in order to see if all properties are specified correctly and generally makes the code more prone to errors. 
 In simple examples this is often not a problem, but when applications get more and more complex, validating if all possible states of an application can become challenging. 
@@ -156,25 +156,25 @@ In order to overcome this limitation and improve the general developer experienc
 
 \subsection{Different approaches and tools for developing DSLs}
 When creating domain-specific languages, several tools can be used to do so. A few examples are Rascal, a  language for meta-programming and the intend to solve problems in the domain of source code analysis and transformation\cite{klint2009easy}.
-GMF (Graphical Modelling Framework) a java-based graphical editor in the form of an eclipse plugin that provides the infrastructure to create, from a UML like model\cite{james2011designing}.
+GMF (Graphical Modelling Framework) a Java-based graphical editor in the form of an eclipse plugin that provides the infrastructure to create, from a UML like model\cite{james2011designing}.
 JetBrains MPS (Meta Programming System), is an open-source language workbench developed by Jetbrains. A central feature of MPS is its projectional editor, which is one style of implementing the core of a language workbench\cite{voelter2019lessons}.
 
 Another approach is to build the DSL based on an existing language inheriting its infrastructure and tailoring it in a unique way to the domain of interest, resulting in a domain-specific embedded language. This approach does not require the development of a new language for scratch and still facilitates an infrastructure that allows reuse of syntax, semantics, implementation code and other related artefacts\cite{685738}.
  
 \subsection{Implementation}
-One of the most important aspects for choosing which toolkit and programming language to implement the DSL is interoperability with the existing tool-sets already present. Since, in this paper we focus mostly on creating web-based visualizations, the most important topic of interoperability was to easily be included in JavaScript front-end code. This narrows down our choice of languages to languages that either run natively (e.g. JavaScript) or can be transpiled to languages that run natively in the browser (e.g. kotlin and Typescript).
+One of the most important aspects for choosing which toolkit and programming language to implement the DSL is interoperability with the existing tool-sets already present. Since, in this paper we focus mostly on creating web-based visualizations, the most important topic of interoperability was to easily be included in JavaScript front-end code. This narrows down our choice of languages to languages that either run natively (e.g. JavaScript) or can be transpiled to languages that run natively in the browser (e.g. Kotlin and Typescript).
 
-Of the aforementioned languages, kotlin is the only one that not only can be transpiled to JavaScript for running in web-based projects, but can also be compiled to both JVM and native code. This also allows utilising the developed DSL for implement visualizations as a part of mobile or desktop applications. Regardless of these benefits, this paper will solely focus on developing an exemplary implementation for web-based visualizations.
+Of the aforementioned languages, Kotlin is the only one that not only can be transpiled to JavaScript for running in web-based projects, but can also be compiled to both JVM and native code. This also allows utilising the developed DSL for implement visualizations as a part of mobile or desktop applications. Regardless of these benefits, this paper will solely focus on developing an exemplary implementation for web-based visualizations.
 
-The code for creating the population layer needed for the visualization in figure \ref{fig:map_viz} using our exemplary implementation of the MapboxDsl in kotlin is shown in figure \ref{fig:dsl-config}. We can see that by utilizing the proposed DSL, the required code is not only becoming more concise and readable at the same time, but can also be statically validated: An IDE is now able to highlight errors and problems with both expressions and value declarations before the code has been executed.
+The code for creating the population layer needed for the visualization in Figure \ref{fig:map_viz} using our exemplary implementation of the MapboxDsl in Kotlin is shown in Figure \ref{fig:dsl-config}. We can see that by utilizing the proposed DSL, the required code is not only becoming more concise and readable at the same time, but can also be statically validated: An IDE is now able to highlight errors and problems with both expressions and value declarations before the code has been executed.
 
-An additional benefit is the better development experience when implementing configurations with MapboxDsl. This benefit stems in equal parts from the ability to use \textit{KDoc} comments to provide additional documentation in the place where the code is used and the possibility to get IDE-provided suggestions and completions while writing code. \textit{KDoc} is the documentation style of the kotlin language and is syntactically similar to the \textit{JavaDoc} commenting style. 
+An additional benefit is the better development experience when implementing configurations with MapboxDSL. This benefit stems in equal parts from the ability to use \textit{KDoc} comments to provide additional documentation in the place where the code is used and the possibility to get IDE-provided suggestions and completions while writing code. \textit{KDoc} is the documentation style of the Kotlin language and is syntactically similar to the \textit{JavaDoc} commenting style. 
 By providing comments in the specified format extensive documentation, development hints and usage examples can be defined. By utilising IDE support, this additional information can then be shown to developer without having to first navigate through external documentation. Another - in this case very helpful - feature of \textit{KDoc} is the ability to specify documents in the Markdown format which brings the helpful ability to include images in documentation code for  style definitions.
 
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{img/vienna-dsl.png}
-    \caption{Layer configuration for population layer with MapboxDsl}
+    \caption{Layer configuration for population layer with MapboxDSL}
     \label{fig:dsl-config}
 \end{figure}
 
@@ -182,11 +182,11 @@ By providing comments in the specified format extensive documentation, developme
 
 Spatial data visualization is a task that requires both modern technologies, fast development speed and short turn-around times when it comes to providing up-to-date visualizations on current topics. Due to these reasons, the field of spatial data visualization profits greatly from the implementation of a domain specific language that simplifies authoring web-based geospatial data visualizations.
 
-In this paper, we have proposed an exemplary implementation of the MapboxDsl using the kotlin programming language. Furthermore, we have shown the viability of implementing a DSL for the topic at hand by comparing alternative solutions for solving problems related to configuration files used by Mapbox to our proposed solution. Last but not least, we have shown the differences and advantages of using a DSL for defining visualisations compared to regular JSON configuration files in a practical use-case.
+In this paper, we have proposed an exemplary implementation of the MapboxDSL using the Kotlin programming language. Furthermore, we have shown the viability of implementing a DSL for the topic at hand by comparing alternative solutions for solving problems related to configuration files used by Mapbox to our proposed solution. Last but not least, we have shown the differences and advantages of using a DSL for defining visualisations compared to regular JSON configuration files in a practical use-case.
 
-As of now, our proposed exemplary implementation of MapboxDsl only contains the functionality for creating the map visualization shown in figure \ref{fig:map_viz}. To not only cover our exemplary use-case the remaining parts of the Mapbox GL Style Specification also have to be added to MapboxDsl. 
+As of now, our proposed exemplary implementation of MapboxDSL only contains the functionality for creating the map visualization shown in figure \ref{fig:map_viz}. To not only cover our exemplary use-case the remaining parts of the Mapbox GL Style Specification also have to be added to MapboxDSL. 
 
-Future work includes implementing the remaining features, as specified in the MS specification. Futhermore, MapboxDsl should be able to be adapted for usage on the Android, iOs and Unity platforms as well, in order simplify generating map visualizations on all platforms supported by Mapbox.
+Future work includes implementing the remaining features, as specified in the MS specification. Futhermore, MapboxDSL should be able to be adapted for usage on the Android, iOS and Unity platforms as well, in order simplify generating map visualizations on all platforms supported by Mapbox.
 
 
 \section*{Acknowledgment}
