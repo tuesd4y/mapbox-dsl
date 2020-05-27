@@ -166,6 +166,14 @@ class InterpolateExpression<T : Any>(
     }
 }
 
+/**
+ * Produces continuous, smooth results by linearly interpolating between pairs of input and output values ("stops").
+ * The input may be any numeric expression (e.g., ["get", "population"]).
+ * Stop inputs must be numeric literals in strictly ascending order.
+ * The output type must be number, array<number>, or color.
+ *
+ * More information on [The mapbox style docs](https://docs.mapbox.com/mapbox-gl-js/style-spec/expressions/#interpolate)
+ */
 fun <T : Any> interpolateLinear(value: Expression<Number>, vararg stops: Pair<Number, T>) = InterpolateExpression(
     InterpolationMethod.LINEAR, value, *stops
 )
