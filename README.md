@@ -1,7 +1,7 @@
 # Mapbox DSL
 
 ![GitHub Workflow Status](<https://img.shields.io/github/workflow/status/tuesd4y/mapbox-dsl/Build LaTeX paper and create release?style=for-the-badge>)
-[![download link](<https://img.shields.io/badge/download-latest%20version%20(pdf)-green?style=for-the-badge>)](https://github.com/tuesd4y/mapbox-dsl/releases)
+[![download link](<https://img.shields.io/badge/download-latest%20version%20(pdf)-green?style=for-the-badge>)](https://github.com/tuesd4y/mapbox-dsl/releases)[![download link](<https://img.shields.io/badge/download-presentation(pdf)-green?style=for-the-badge>)](https://raw.githubusercontent.com/tuesd4y/mapbox-dsl/master/paper/presentation.pdf)
 
 The application of geospatial big data to an increasing number of topics presents new opportunities and challenges for cartographic researchers.
 Many emerging technologies focus on providing functionality to implement appealing and informative visualisations.

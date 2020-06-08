@@ -1,57 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Simple Map</title>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.css' rel='stylesheet'/>
-</head>
-<body>
-<div id="map" style="position:absolute; width: 1000px; height: 600px; top: 0;left: 0;"></div>
-<script>
-    fetch('/MapboxToken').then(res => res.text()).then(token => setupMap(token.trimStart()));
-    let map;
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div
+      id="map"
+      style="position: absolute; width: 1000px; height: 600px; top: 0; left: 0;"
+    ></div>
+    <script>
+      fetch('/MapboxToken')
+        .then((res) => res.text())
+        .then((token) => setupMap(token.trimStart()))
+      let map
 
-    function setupMap(token) {
-        mapboxgl.accessToken = token;
+      function setupMap(token) {
+        mapboxgl.accessToken = token
         map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/light-v9',
-            bearing: -20,
-            pitch: 65,
-            zoom: 10.4,
-            center: [16.411462459889663, 48.19093305465441],
-        });
+          container: 'map',
+          style: 'mapbox://styles/mapbox/light-v9',
+          bearing: -20,
+          pitch: 65,
+          zoom: 10.4,
+          center: [16.411462459889663, 48.19093305465441],
+        })
 
         map.on('load', () => {
-            map.addLayer({
-                "id": "population",
-                "type": "fill-extrusion",
-                "source": {
-                    "type": "geojson",
-                    "data": "./data/vienna_population.geojson"
-                },
-                "paint": {
-                    "fill-extrusion-color": [
-                        "interpolate",
-                        ["linear"],
-                        ["*", 40, ["sqrt", ["get", "tot_p"]]],
-                        0,
-                        "#ecda9a",
-                        5600,
-                        "#ee4d5a"
-                    ],
-                    "fill-extrusion-height": [
-                        "*",
-                        40,
-                        ["sqrt", ["get", "tot_p"]]
-                    ],
-                    "fill-extrusion-opacity": 0.5
-                }
-            });
-        });
-    }
-
-</script>
-</body>
+          map.addLayer({
+            id: 'population',
+            type: 'fill-extrusion',
+            source: {
+              type: 'geojson',
+              data: '/data/vienna_population.geojson',
+            },
+            paint: {
+              'fill-extrusion-color': [
+                'interpolate',
+                ['linear'],
+                ['*', 40, ['sqrt', ['get', 'tot_p']]],
+                0,
+                '#ecda9a',
+                5600,
+                '#ee4d5a',
+              ],
+              'fill-extrusion-height': ['*', 40, ['sqrt', ['get', 'tot_p']]],
+              'fill-extrusion-opacity': 0.5,
+            },
+          })
+        })
+      }
+    </script>
+  </body>
 </html>
